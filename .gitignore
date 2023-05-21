@@ -44,9 +44,6 @@ lerna-debug.log*
 !.yarn/versions
 .pnp.*
 
-# Husky caches
-.husky/*
-
 # misc
 /.sass-cache
 /connect.lock
