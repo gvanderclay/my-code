@@ -1,3 +1,5 @@
+import { identity } from 'lodash';
+
 type DesignFn<T extends object, P extends keyof T = keyof T> = () =>
   | PromiseLike<T[P]>
   | T[P];
@@ -8,7 +10,7 @@ type BlueprintDesignValue<T extends object, P extends keyof T = keyof T> =
   | DesignFn<T, P>;
 
 export type BlueprintDesign<T extends object> = {
-  [P in keyof T]: BlueprintDesignValue<T>;
+  [P in keyof T]: BlueprintDesignValue<T, P>;
 };
 
 export type Blueprint<
@@ -21,9 +23,6 @@ export type Blueprint<
     overrides?: Partial<TInput>,
   ) => Promise<Transformed[]>;
 };
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const identity = (x: any) => x;
 
 export const design = <
   TInput extends object,
